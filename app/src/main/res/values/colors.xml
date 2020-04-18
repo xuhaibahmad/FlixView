@@ -2,8 +2,9 @@
 <resources>
     <color name="colorPrimary">#db0000</color>
     <color name="colorPrimaryDark">#831010</color>
-    <color name="colorAccent">#564D4D</color>
+    <color name="colorAccent">#263238</color>
     <color name="textColorPrimary">#ffffff</color>
-    <color name="textColorSecondary">#564d4d</color>
+    <color name="textColorSecondary">#263238</color>
     <color name="backgroundColor">#000000</color>
+    <color name="cardContentBackground">#06838f</color>
 </resources>
