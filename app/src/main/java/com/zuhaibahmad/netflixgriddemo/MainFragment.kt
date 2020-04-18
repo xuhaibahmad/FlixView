@@ -5,26 +5,17 @@ import android.os.Handler
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
 import com.zuhaibahmad.netflixgriddemo.data.BrowseItem
+import com.zuhaibahmad.netflixgriddemo.utils.CircularArrayObjectAdapter
 import com.zuhaibahmad.netflixgriddemo.utils.FakeDataFactory
 import com.zuhaibahmad.netflixgriddemo.views.ContentPresenterSelector
 
 
 class MainFragment : RowsSupportFragment() {
 
-    private val presenterSelector = ContentPresenterSelector()
     private val rowAdapter = ArrayObjectAdapter(ListRowPresenter())
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupUi()
-        setupRowAdapter()
-    }
-
-    private fun setupUi() {
-        setExpand(true)
-    }
-
-    private fun setupRowAdapter() {
         adapter = rowAdapter
         Handler().postDelayed({
             createRows()
@@ -37,26 +28,44 @@ class MainFragment : RowsSupportFragment() {
         }
     }
 
-    private fun createCardRow(item: BrowseItem): Row = when (item) {
-        is BrowseItem.Banner -> {
-            val listRowAdapter = ArrayObjectAdapter(presenterSelector)
-            listRowAdapter.add(item)
-            ListRow(listRowAdapter)
+    private fun createCardRow(item: BrowseItem): Row {
+        val presenterSelector = ContentPresenterSelector()
+        return when (item) {
+            is BrowseItem.Banner -> createBannerRow(presenterSelector, item)
+            is BrowseItem.Section -> createSectionRow(presenterSelector, item)
+            is BrowseItem.Actions -> createActionsRow(presenterSelector, item)
+            else -> throw IllegalArgumentException("Unknown item ${item.javaClass.simpleName}")
         }
-        is BrowseItem.Section -> {
-            val listRowAdapter = ArrayObjectAdapter(presenterSelector)
-            for (card in item.items) {
-                listRowAdapter.add(card)
-            }
-            ListRow(HeaderItem(item.category), listRowAdapter)
+    }
+
+    private fun createActionsRow(
+        presenterSelector: ContentPresenterSelector,
+        item: BrowseItem.Actions
+    ): ListRow {
+        val actionsAdapter = ArrayObjectAdapter(presenterSelector)
+        for (card in item.items) {
+            actionsAdapter.add(card)
         }
-        is BrowseItem.Actions -> {
-            val listRowAdapter = ArrayObjectAdapter(presenterSelector)
-            for (card in item.items) {
-                listRowAdapter.add(card)
-            }
-            ListRow(HeaderItem(item.header), listRowAdapter)
+        return ListRow(HeaderItem(item.header), actionsAdapter)
+    }
+
+    private fun createSectionRow(
+        presenterSelector: ContentPresenterSelector,
+        item: BrowseItem.Section
+    ): ListRow {
+        val sectionAdapter = CircularArrayObjectAdapter(presenterSelector, item.items)
+        for (card in item.items) {
+            sectionAdapter.add(card)
         }
-        else -> throw IllegalArgumentException("Unknown item ${item.javaClass.simpleName}")
+        return ListRow(HeaderItem(item.category), sectionAdapter)
+    }
+
+    private fun createBannerRow(
+        presenterSelector: ContentPresenterSelector,
+        item: BrowseItem
+    ): ListRow {
+        val bannerAdapter = ArrayObjectAdapter(presenterSelector)
+        bannerAdapter.add(item)
+        return ListRow(bannerAdapter)
     }
 }

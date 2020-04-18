@@ -30,7 +30,7 @@ object FakeDataFactory {
         get() = BrowseItem.Banner(
             id = "banner",
             title = "Daredevil",
-            imageUrl = "https://xeraone.ca/wp-content/uploads/Daredevil-Banner-1024x474.png"
+            imageUrl = "https://serial.everyeye.it/public/immagini/30052015/daredevil-netflix-series-season-1-banner-poster.jpg"
         )
 
     private val fakeThumbnails
