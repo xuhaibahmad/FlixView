@@ -2,9 +2,12 @@ package com.zuhaibahmad.netflixgriddemo
 
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
 import com.zuhaibahmad.netflixgriddemo.data.BrowseItem
+import com.zuhaibahmad.netflixgriddemo.data.Icon
+import com.zuhaibahmad.netflixgriddemo.data.Thumbnail
 import com.zuhaibahmad.netflixgriddemo.utils.CircularArrayObjectAdapter
 import com.zuhaibahmad.netflixgriddemo.utils.FakeDataFactory
 import com.zuhaibahmad.netflixgriddemo.views.ContentPresenterSelector
@@ -17,6 +20,15 @@ class MainFragment : RowsSupportFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         adapter = rowAdapter
+        setOnItemViewClickedListener { itemViewHolder, item, rowViewHolder, row ->
+            if (item is BrowseItem.Banner) return@setOnItemViewClickedListener
+            val message = when (item) {
+                is Icon -> "${item.label} clicked!"
+                is Thumbnail -> "${item.label} clicked!"
+                else -> "Unknown item $item clicked!"
+            }
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
         Handler().postDelayed({
             createRows()
         }, 500)
