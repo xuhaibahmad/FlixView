@@ -1,8 +1,10 @@
 package com.zuhaibahmad.netflixgriddemo.recyclerview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zuhaibahmad.netflixgriddemo.R
@@ -11,7 +13,7 @@ import com.zuhaibahmad.netflixgriddemo.recyclerview.ContentAdapter.ContentViewHo
 import kotlinx.android.synthetic.main.list_item_section.view.*
 
 class ContentAdapter(
-    private val items: List<Thumbnail>
+    private val items: MutableList<Thumbnail> = mutableListOf()
 ) : RecyclerView.Adapter<ContentViewHolder>() {
 
     private var selectedItem = -1
@@ -24,10 +26,18 @@ class ContentAdapter(
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
         holder.bind(items[position])
+        Log.e("ContentAdapter", "Selected: $selectedItem == Current: $position")
+        holder.itemView.vSelection.isVisible = selectedItem == position
     }
 
     fun setSelecteditem(selecteditem: Int) {
         selectedItem = selecteditem
+        notifyDataSetChanged()
+    }
+
+    fun update(list: List<Thumbnail>) {
+        items.clear()
+        items.addAll(list)
         notifyDataSetChanged()
     }
 
@@ -38,11 +48,10 @@ class ContentAdapter(
     inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: Thumbnail) {
-            val action = item as Thumbnail
-            itemView.tvTitle.text = action.label
+            itemView.tvTitle.text = item.label
             Glide.with(itemView.context)
                 .asBitmap()
-                .load(action.imageUrl)
+                .load(item.imageUrl)
                 .into(itemView.ivThumbnail);
         }
     }

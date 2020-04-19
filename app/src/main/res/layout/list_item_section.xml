@@ -5,6 +5,9 @@
     android:layout_width="@dimen/card_width"
     android:layout_height="@dimen/card_height"
     android:layout_margin="4dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:foreground="@drawable/section_foreground"
     app:cardBackgroundColor="@color/colorAccent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,9 +30,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/cardContentBackground"
+            android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
-            android:ellipsize="end"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,4 +40,11 @@
             tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vSelection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:visibility="gone" />
 </com.google.android.material.card.MaterialCardView>
