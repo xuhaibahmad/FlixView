@@ -1,7 +1,7 @@
-package com.zuhaibahmad.netflixgriddemo.utils
+package com.zuhaibahmad.netflixgriddemo.leanback.utils
 
 import androidx.leanback.widget.ArrayObjectAdapter
-import com.zuhaibahmad.netflixgriddemo.views.ContentPresenterSelector
+import com.zuhaibahmad.netflixgriddemo.leanback.views.ContentPresenterSelector
 
 class CircularArrayObjectAdapter(
     presenterSelector: ContentPresenterSelector,
