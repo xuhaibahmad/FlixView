@@ -9,13 +9,7 @@ object FakeDataFactory {
 
     fun getFakeData(): MutableList<BrowseItem> {
         val data = mutableListOf<BrowseItem>()
-        val sections = (1..5).map {
-            BrowseItem.Section(
-                id = it.toString(),
-                category = "Category # $it",
-                items = fakeThumbnails.shuffled()
-            )
-        }
+        val sections = getCategorizedContent()
         val actions = BrowseItem.Actions(
             id = "actions",
             items = fakeIcons
@@ -23,6 +17,16 @@ object FakeDataFactory {
         data.addAll(sections)
         data.add(actions)
         return data
+    }
+
+    fun getCategorizedContent(): List<BrowseItem.Section> {
+        return (1..5).map {
+            BrowseItem.Section(
+                id = it.toString(),
+                category = "Category # $it",
+                items = fakeThumbnails.shuffled()
+            )
+        }
     }
 
     val fakeThumbnails

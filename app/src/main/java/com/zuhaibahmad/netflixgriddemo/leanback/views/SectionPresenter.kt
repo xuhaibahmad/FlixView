@@ -6,12 +6,12 @@ import androidx.leanback.widget.Presenter
 import com.bumptech.glide.Glide
 import com.zuhaibahmad.netflixgriddemo.R
 import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
-import kotlinx.android.synthetic.main.list_item_section.view.*
+import kotlinx.android.synthetic.main.list_item_content.view.*
 
 class SectionPresenter : Presenter() {
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_section, parent, false)
+            .inflate(R.layout.list_item_content, parent, false)
         return ViewHolder(view)
     }
 
