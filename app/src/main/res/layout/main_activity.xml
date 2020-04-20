@@ -16,23 +16,26 @@
             android:id="@+id/ivBanner"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent=".5"
             app:layout_constraintDimensionRatio="36:10"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintHeight_percent=".5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!--android:name="com.zuhaibahmad.netflixgriddemo.leanback.LeanbackFragment"-->
+        <!-- Attributes
+        android:name="com.zuhaibahmad.netflixgriddemo.leanback.LeanbackFragment"
+        android:name="com.zuhaibahmad.netflixgriddemo.recyclerview.RecyclerViewFragment"
+        -->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/vFragment"
             android:name="com.zuhaibahmad.netflixgriddemo.recyclerview.RecyclerViewFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBanner"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBanner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

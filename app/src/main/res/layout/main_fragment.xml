@@ -3,18 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:focusable="false"
-    android:focusableInTouchMode="false"
-    android:descendantFocusability="afterDescendants"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.leanback.widget.VerticalGridView
+    <com.zuhaibahmad.netflixgriddemo.recyclerview.views.CustomVerticalGridView
         android:id="@+id/rvSection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,4 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/list_item_section" />
 
+    <View
+        android:id="@+id/vSelection"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="@dimen/card_height"
+        android:background="@color/colorPrimary"
+        android:alpha=".6"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="27dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

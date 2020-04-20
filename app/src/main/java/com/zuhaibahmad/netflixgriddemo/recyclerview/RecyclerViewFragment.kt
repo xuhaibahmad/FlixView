@@ -1,8 +1,6 @@
 package com.zuhaibahmad.netflixgriddemo.recyclerview
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +24,5 @@ class RecyclerViewFragment : Fragment() {
         val data = FakeDataFactory.getCategorizedContent().toMutableList()
         val rowAdapter = SectionRowAdapter(data)
         rvSection.adapter = rowAdapter
-        rvSection.isNestedScrollingEnabled = true
-        rvSection.setOnChildSelectedListener { _, _, position, _ ->
-            Handler().postDelayed({
-                rowAdapter.setSelectedItemPosition(position)
-            }, 500)
-        }
     }
 }

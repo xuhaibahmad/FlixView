@@ -1,63 +1,75 @@
 package com.zuhaibahmad.netflixgriddemo.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zuhaibahmad.netflixgriddemo.R
 import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
 import kotlinx.android.synthetic.main.list_item_content.view.tvTitle
 import kotlinx.android.synthetic.main.list_item_section.view.*
-import kotlinx.android.synthetic.main.main_fragment.*
 
 class SectionRowAdapter(
     private val items: MutableList<BrowseItem.Section> = mutableListOf()
-) : RecyclerView.Adapter<SectionRowAdapter.SectionViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val adapters = HashMap<Int, ContentAdapter>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_section, parent, false)
-        return SectionViewHolder(view)
+    companion object {
+        const val EMPTY_STRING = ""
+        const val PADDING_VIEW = 0
+        const val NORMAL_VIEW = 1
+        var currentRow = 0
+        var currentCol = 0
     }
 
-    override fun onBindViewHolder(holder: SectionViewHolder, position: Int) {
-        val adapter = ContentAdapter(getItem(position).items.toMutableList())
-        adapters[position] = adapter
-        holder.bind(getItem(position), adapter)
+    init {
+        items.add(0, BrowseItem.Section("first", EMPTY_STRING, emptyList()))
+        items.add(items.size, BrowseItem.Section("last", EMPTY_STRING, emptyList()))
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == PADDING_VIEW) {
+            val view = inflater.inflate(R.layout.list_item_section_padding, parent, false)
+            PaddingViewHolder(view)
+        } else {
+            val view = inflater.inflate(R.layout.list_item_section, parent, false)
+            SectionViewHolder(view)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is SectionViewHolder) {
+            val adapter = ContentAdapter(getItem(position).items.toMutableList())
+            holder.bind(getItem(position), adapter)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val id = getItem(position).id
+        return if (id == "first" || id == "last") PADDING_VIEW else NORMAL_VIEW
     }
 
     override fun getItemCount(): Int = items.size
 
     private fun getItem(index: Int): BrowseItem.Section = items[index]
 
-    fun setSelectedItemPosition(position: Int) {
-        Log.e("SectionRowAdapter", "Selected Category: ${getItem(position).category}")
-        adapters.values.forEach { it.updateFocus(false) }
-        adapters[position]?.updateFocus(true)
-    }
+    class PaddingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    inner class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(
             item: BrowseItem.Section,
             adapter: ContentAdapter
         ) {
             itemView.tvTitle.text = item.category
-            itemView.rvContent.layoutManager = LinearLayoutManager(
+            itemView.rvContent.layoutManager = GridLayoutManager(
                 itemView.context,
-                LinearLayoutManager.HORIZONTAL,
+                1,
+                GridLayoutManager.HORIZONTAL,
                 false
             )
             itemView.rvContent.adapter = adapter
-            itemView.rvContent.isNestedScrollingEnabled = false
-            itemView.rvContent.setOnChildSelectedListener { parent, view, position, id ->
-                Log.e("SectionRowAdapter", "Content Pos: $position")
-                adapter.updateFocus(true)
-            }
         }
     }
 }

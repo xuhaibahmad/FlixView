@@ -41,12 +41,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/vSelection"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:alpha=".6"
-        android:visibility="gone"
-        tools:visibility="visible"/>
 </com.google.android.material.card.MaterialCardView>
