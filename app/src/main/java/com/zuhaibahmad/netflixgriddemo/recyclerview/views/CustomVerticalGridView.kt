@@ -14,11 +14,14 @@ class CustomVerticalGridView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : VerticalGridView(context, attributeSet, defStyle) {
 
+    private val sectionAdapter by lazy { (adapter as SectionRowAdapter) }
+
     override fun onFinishInflate() {
         super.onFinishInflate()
         this.smoothScrollToPosition(1)
         this.setOnChildSelectedListener { _, _, position, _ ->
             SectionRowAdapter.currentRow = position
+            sectionAdapter.notifyViewHolderUpdated(position)
             Log.e("CVGV", "Updating current row")
         }
     }

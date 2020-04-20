@@ -7,8 +7,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zuhaibahmad.netflixgriddemo.R
 import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
+import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
 import kotlinx.android.synthetic.main.list_item_content.view.tvTitle
 import kotlinx.android.synthetic.main.list_item_section.view.*
+
+typealias OnChildSelectedListener = (Int, Thumbnail) -> Unit
+typealias OnChildClickedListener = (Int, Thumbnail) -> Unit
 
 class SectionRowAdapter(
     private val items: MutableList<BrowseItem.Section> = mutableListOf()
@@ -18,13 +22,18 @@ class SectionRowAdapter(
         const val EMPTY_STRING = ""
         const val PADDING_VIEW = 0
         const val NORMAL_VIEW = 1
+        const val FIRST = "first"
+        const val LAST = "last"
         var currentRow = 0
-        var currentCol = 0
     }
 
+    private val viewHolders = HashMap<Int, SectionViewHolder>()
+    private var childSelectedListener: OnChildSelectedListener? = null
+    private var childClickedListener: OnChildClickedListener? = null
+
     init {
-        items.add(0, BrowseItem.Section("first", EMPTY_STRING, emptyList()))
-        items.add(items.size, BrowseItem.Section("last", EMPTY_STRING, emptyList()))
+        items.add(0, BrowseItem.Section(FIRST, EMPTY_STRING, emptyList()))
+        items.add(items.size, BrowseItem.Section(LAST, EMPTY_STRING, emptyList()))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,6 +43,12 @@ class SectionRowAdapter(
             PaddingViewHolder(view)
         } else {
             val view = inflater.inflate(R.layout.list_item_section, parent, false)
+            view.rvContent.setOnItemViewSelectedListener { i, thumbnail ->
+                childSelectedListener?.invoke(i, thumbnail)
+            }
+            view.rvContent.setOnItemViewClickedListener { i, thumbnail ->
+                childClickedListener?.invoke(i, thumbnail)
+            }
             SectionViewHolder(view)
         }
     }
@@ -41,18 +56,31 @@ class SectionRowAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is SectionViewHolder) {
             val adapter = ContentAdapter(getItem(position).items.toMutableList())
+            viewHolders[position] = holder
             holder.bind(getItem(position), adapter)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         val id = getItem(position).id
-        return if (id == "first" || id == "last") PADDING_VIEW else NORMAL_VIEW
+        return if (id == FIRST || id == LAST) PADDING_VIEW else NORMAL_VIEW
     }
 
     override fun getItemCount(): Int = items.size
 
     private fun getItem(index: Int): BrowseItem.Section = items[index]
+
+    fun setOnChildSelectedListener(listener: OnChildSelectedListener) {
+        this.childSelectedListener = listener
+    }
+
+    fun setOnChildClickedListener(listener: OnChildClickedListener) {
+        this.childClickedListener = listener
+    }
+
+    fun notifyViewHolderUpdated(position: Int) {
+        viewHolders[position]?.itemView?.rvContent?.updateSelectedPosition()
+    }
 
     class PaddingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

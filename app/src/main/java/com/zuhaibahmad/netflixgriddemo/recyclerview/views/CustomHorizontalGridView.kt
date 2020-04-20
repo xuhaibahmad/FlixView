@@ -6,14 +6,21 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
 import com.zuhaibahmad.netflixgriddemo.recyclerview.ContentAdapter
 import com.zuhaibahmad.netflixgriddemo.recyclerview.utils.StartSnapHelper
+
+typealias OnItemViewSelectedListener = (Int, Thumbnail) -> Unit
+typealias OnItemViewClickedListener = (Int, Thumbnail) -> Unit
 
 class CustomHorizontalGridView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : RecyclerView(context, attributeSet, defStyle) {
+
+    private var selectedListener: OnItemViewSelectedListener? = null
+    private var clickedListener: OnItemViewClickedListener? = null
 
     private val contentAdapter by lazy { (adapter as ContentAdapter) }
     private val snapHelper: StartSnapHelper = StartSnapHelper()
@@ -39,6 +46,7 @@ class CustomHorizontalGridView @JvmOverloads constructor(
         Log.e("CHGV", "H Scroll Left -> Pos: $pos")
         if (pos >= 0) {
             smoothScrollToPosition(pos)
+            updateSelectedPosition()
         }
         return true
     }
@@ -49,19 +57,38 @@ class CustomHorizontalGridView @JvmOverloads constructor(
         Log.e("CHGV", "H Scroll Right -> Pos: $pos")
         if (pos < contentAdapter.itemCount) {
             smoothScrollToPosition(pos)
+            updateSelectedPosition()
         }
         return true
     }
 
     private fun scrollCenter(): Boolean {
         val pos = getSelectedItemPosition()
-        Log.e("CVGV", "H Scroll Center: ${contentAdapter.getItem(pos).label}")
+        val item = contentAdapter.getItem(pos)
+        Log.e("CVGV", "H Scroll Center: ${item.label}")
+        clickedListener?.invoke(pos, item)
         return true
     }
 
-    fun getSelectedItemPosition(): Int {
+    fun updateSelectedPosition() {
+        postDelayed({
+            val pos = getSelectedItemPosition()
+            val item = contentAdapter.getItem(pos)
+            Log.e("CVGV", "H Scroll Selection: ${item.label}")
+            selectedListener?.invoke(pos, item)
+        }, 500)
+    }
+
+    fun setOnItemViewSelectedListener(listener: OnItemViewSelectedListener) {
+        this.selectedListener = listener
+    }
+
+    fun setOnItemViewClickedListener(listener: OnItemViewClickedListener) {
+        this.clickedListener = listener
+    }
+
+    private fun getSelectedItemPosition(): Int {
         val linearLayoutManager = layoutManager as LinearLayoutManager
-        val pos = linearLayoutManager.findFirstVisibleItemPosition()
-        return pos
+        return linearLayoutManager.findFirstVisibleItemPosition()
     }
 }
