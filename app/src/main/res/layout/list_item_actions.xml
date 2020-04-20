@@ -28,7 +28,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/cardContentBackground"
+            android:background="@color/colorPrimary"
             android:gravity="center"
             android:lines="1"
             android:ellipsize="end"

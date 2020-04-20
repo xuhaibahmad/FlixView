@@ -8,11 +8,24 @@ import com.bumptech.glide.Glide
 import com.zuhaibahmad.netflixgriddemo.R
 import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
 import com.zuhaibahmad.netflixgriddemo.recyclerview.ContentAdapter.ContentViewHolder
+import com.zuhaibahmad.netflixgriddemo.recyclerview.views.CustomHorizontalGridView
 import kotlinx.android.synthetic.main.list_item_content.view.*
 
 class ContentAdapter(
     private val items: MutableList<Thumbnail> = mutableListOf()
 ) : RecyclerView.Adapter<ContentViewHolder>() {
+
+    private var recyclerView: CustomHorizontalGridView? = null
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView as CustomHorizontalGridView
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        this.recyclerView = null
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
         val view = LayoutInflater.from(parent.context)

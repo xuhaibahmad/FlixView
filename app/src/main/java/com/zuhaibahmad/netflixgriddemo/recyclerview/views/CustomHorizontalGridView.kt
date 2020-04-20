@@ -54,9 +54,14 @@ class CustomHorizontalGridView @JvmOverloads constructor(
     }
 
     private fun scrollCenter(): Boolean {
-        val linearLayoutManager = layoutManager as LinearLayoutManager
-        val pos = linearLayoutManager.findFirstVisibleItemPosition()
+        val pos = getSelectedItemPosition()
         Log.e("CVGV", "H Scroll Center: ${contentAdapter.getItem(pos).label}")
         return true
+    }
+
+    fun getSelectedItemPosition(): Int {
+        val linearLayoutManager = layoutManager as LinearLayoutManager
+        val pos = linearLayoutManager.findFirstVisibleItemPosition()
+        return pos
     }
 }

@@ -6,5 +6,5 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="textColorSecondary">#263238</color>
     <color name="backgroundColor">#000000</color>
-    <color name="cardContentBackground">#06838f</color>
+    <color name="colorTransulcentLight">#88cccccc</color>
 </resources>
