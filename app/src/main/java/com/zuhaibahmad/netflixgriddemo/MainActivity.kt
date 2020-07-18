@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displayMessage(message: String) {
+    private fun displayMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

@@ -24,7 +24,7 @@ class FlixView : FrameLayout {
     private var childSelectedListener: OnChildSelectedListener? = null
     private var childClickedListener: OnChildClickedListener? = null
 
-    val rowAdapter = SectionRowAdapter()
+    private val rowAdapter = SectionRowAdapter()
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
