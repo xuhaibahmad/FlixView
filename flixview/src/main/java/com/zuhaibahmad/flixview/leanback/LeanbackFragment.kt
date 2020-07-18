@@ -1,18 +1,25 @@
-package com.zuhaibahmad.netflixgriddemo.leanback
+package com.zuhaibahmad.flixview.leanback
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
-import com.zuhaibahmad.netflixgriddemo.BannerScreen
-import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Icon
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
-import com.zuhaibahmad.netflixgriddemo.leanback.utils.CircularArrayObjectAdapter
-import com.zuhaibahmad.netflixgriddemo.leanback.utils.FakeDataFactory
-import com.zuhaibahmad.netflixgriddemo.leanback.views.ContentPresenterSelector
+import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.transition.ViewPropertyTransition
+import com.zuhaibahmad.flixview.leanback.data.BrowseItem
+import com.zuhaibahmad.flixview.leanback.data.Icon
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.leanback.utils.CircularArrayObjectAdapter
+import com.zuhaibahmad.flixview.leanback.utils.FakeDataFactory
+import com.zuhaibahmad.flixview.leanback.views.ContentPresenterSelector
 
+
+interface BannerScreen {
+    fun updateBanner(url: String? = null)
+}
 
 class LeanbackFragment : RowsSupportFragment() {
 

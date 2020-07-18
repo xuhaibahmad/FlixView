@@ -1,4 +1,4 @@
-package com.zuhaibahmad.netflixgriddemo.leanback.data
+package com.zuhaibahmad.flixview.leanback.data
 
 sealed class BrowseItem(val id: String) {
     class Section(id: String, val category: String, val items: List<Thumbnail>) : BrowseItem(id)

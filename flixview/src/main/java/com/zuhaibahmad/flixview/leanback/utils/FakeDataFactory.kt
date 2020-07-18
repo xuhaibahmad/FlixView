@@ -1,9 +1,9 @@
-package com.zuhaibahmad.netflixgriddemo.leanback.utils
+package com.zuhaibahmad.flixview.leanback.utils
 
-import com.zuhaibahmad.netflixgriddemo.R
-import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Icon
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.R
+import com.zuhaibahmad.flixview.leanback.data.BrowseItem
+import com.zuhaibahmad.flixview.leanback.data.Icon
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
 
 object FakeDataFactory {
 

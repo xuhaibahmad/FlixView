@@ -1,4 +1,4 @@
-package com.zuhaibahmad.netflixgriddemo.recyclerview.views
+package com.zuhaibahmad.flixview.recyclerview.views
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
-import com.zuhaibahmad.netflixgriddemo.recyclerview.ContentAdapter
-import com.zuhaibahmad.netflixgriddemo.recyclerview.utils.StartSnapHelper
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.recyclerview.ContentAdapter
+import com.zuhaibahmad.flixview.recyclerview.utils.StartSnapHelper
 
 typealias OnItemViewSelectedListener = (Int, Thumbnail) -> Unit
 typealias OnItemViewClickedListener = (Int, Thumbnail) -> Unit

@@ -1,11 +1,11 @@
-package com.zuhaibahmad.netflixgriddemo.recyclerview.views
+package com.zuhaibahmad.flixview.recyclerview.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.KeyEvent
 import androidx.leanback.widget.VerticalGridView
-import com.zuhaibahmad.netflixgriddemo.recyclerview.SectionRowAdapter
+import com.zuhaibahmad.flixview.recyclerview.SectionRowAdapter
 
 @Suppress("DEPRECATION")
 class CustomVerticalGridView @JvmOverloads constructor(

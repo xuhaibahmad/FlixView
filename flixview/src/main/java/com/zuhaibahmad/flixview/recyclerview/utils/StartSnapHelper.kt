@@ -1,4 +1,4 @@
-package com.zuhaibahmad.netflixgriddemo.recyclerview.utils
+package com.zuhaibahmad.flixview.recyclerview.utils
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager

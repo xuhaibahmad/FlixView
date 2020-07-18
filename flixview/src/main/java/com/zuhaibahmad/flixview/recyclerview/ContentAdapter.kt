@@ -1,14 +1,14 @@
-package com.zuhaibahmad.netflixgriddemo.recyclerview
+package com.zuhaibahmad.flixview.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.zuhaibahmad.netflixgriddemo.R
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
-import com.zuhaibahmad.netflixgriddemo.recyclerview.ContentAdapter.ContentViewHolder
-import com.zuhaibahmad.netflixgriddemo.recyclerview.views.CustomHorizontalGridView
+import com.zuhaibahmad.flixview.R
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.recyclerview.ContentAdapter.ContentViewHolder
+import com.zuhaibahmad.flixview.recyclerview.views.CustomHorizontalGridView
 import kotlinx.android.synthetic.main.list_item_content.view.*
 
 class ContentAdapter(

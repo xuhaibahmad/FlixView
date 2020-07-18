@@ -1,13 +1,13 @@
-package com.zuhaibahmad.netflixgriddemo.recyclerview
+package com.zuhaibahmad.flixview.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zuhaibahmad.netflixgriddemo.R
-import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.R
+import com.zuhaibahmad.flixview.leanback.data.BrowseItem
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
 import kotlinx.android.synthetic.main.list_item_content.view.tvTitle
 import kotlinx.android.synthetic.main.list_item_section.view.*
 

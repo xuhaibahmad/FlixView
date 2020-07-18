@@ -1,10 +1,10 @@
-package com.zuhaibahmad.netflixgriddemo.leanback.views
+package com.zuhaibahmad.flixview.leanback.views
 
 import androidx.leanback.widget.Presenter
 import androidx.leanback.widget.PresenterSelector
-import com.zuhaibahmad.netflixgriddemo.leanback.data.BrowseItem
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Icon
-import com.zuhaibahmad.netflixgriddemo.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.leanback.data.BrowseItem
+import com.zuhaibahmad.flixview.leanback.data.Icon
+import com.zuhaibahmad.flixview.leanback.data.Thumbnail
 
 class ContentPresenterSelector: PresenterSelector() {
 
