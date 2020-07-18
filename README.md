@@ -65,7 +65,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         Content(...),
         Content(...),
     )
-    val items = 1..5).map {
+    val items = (1..5).map {
         Category(
             id = it.toString(),
             name = "Category # $it",
