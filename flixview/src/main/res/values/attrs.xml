@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FlixView">
+        <attr name="banner_aspect_ratio" format="string"/>
+        <attr name="selection_foreground" format="reference"/>
+        <!-- Content Item -->
+        <attr name="content_width" format="dimension"/>
+        <attr name="content_height" format="dimension"/>
+        <!-- Category Title -->
+        <attr name="category_title_text_color" format="color"/>
+        <!-- Content Title -->
+        <attr name="content_title_background_color" format="color"/>
+        <attr name="content_title_text_color" format="color"/>
+        <attr name="content_title_text_size" format="dimension"/>
     </declare-styleable>
 </resources>

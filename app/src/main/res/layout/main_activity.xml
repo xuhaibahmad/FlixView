@@ -10,6 +10,14 @@
 
     <com.zuhaibahmad.flixview.FlixView
         android:id="@+id/vFlixView"
+        app:banner_aspect_ratio="36:10"
+        app:selection_foreground="@drawable/selection_foreground"
+        app:content_width="@dimen/test_card_width"
+        app:content_height="@dimen/test_card_height"
+        app:content_title_background_color="@color/redPrimary"
+        app:content_title_text_color="@color/textColorPrimary"
+        app:content_title_text_size="@dimen/title_text_size"
+        app:category_title_text_color="@color/textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -18,6 +26,6 @@
         android:layout_height="wrap_content"
         app:title="@string/app_name"
         android:id="@+id/vToolbar"
-        app:titleTextColor="@color/colorPrimary" />
+        app:titleTextColor="@color/redPrimary" />
 
 </FrameLayout>

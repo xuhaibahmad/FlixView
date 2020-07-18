@@ -15,7 +15,13 @@ typealias OnChildSelectedListener = (Int, Content) -> Unit
 typealias OnChildClickedListener = (Int, Content) -> Unit
 
 class SectionRowAdapter(
-    private val items: MutableList<Category> = mutableListOf()
+    private val items: MutableList<Category> = mutableListOf(),
+    private val itemWidth: Int = 0,
+    private val itemHeight: Int = 0,
+    private val titleBackgroundColor: Int = 0,
+    private val titleTextColor: Int = 0,
+    private val titleTextSize: Float = 0f,
+    private val categoryTextColor: Int = 0
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -62,7 +68,14 @@ class SectionRowAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is SectionViewHolder) {
-            val adapter = ContentAdapter(getItem(position).items.toMutableList())
+            val adapter = ContentAdapter(
+                getItem(position).items.toMutableList(),
+                itemWidth = itemWidth,
+                itemHeight = itemHeight,
+                titleBackgroundColor = titleBackgroundColor,
+                titleTextColor = titleTextColor,
+                titleTextSize = titleTextSize
+            )
             viewHolders[position] = holder
             holder.bind(getItem(position), adapter)
         }
@@ -91,10 +104,15 @@ class SectionRowAdapter(
 
     class PaddingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: Category, adapter: ContentAdapter) {
-            itemView.tvTitle.text = item.name
+            itemView.tvTitle.apply {
+                text = item.name
+                if (categoryTextColor != 0) {
+                    setTextColor(categoryTextColor)
+                }
+            }
             itemView.rvContent.layoutManager = GridLayoutManager(
                 itemView.context,
                 1,
