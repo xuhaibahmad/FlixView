@@ -1,8 +1,8 @@
 package com.zuhaibahmad.netflixgriddemo
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +22,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayMessage(message: String) {
-        Snackbar.make(vContainer, message, Snackbar.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
