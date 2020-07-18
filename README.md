@@ -2,6 +2,8 @@
 
 [ ![Download](https://api.bintray.com/packages/xuhaibahmad/maven/FlixView/images/download.svg) ](https://bintray.com/xuhaibahmad/maven/FlixView/_latestVersion)
 
+[![](https://jitpack.io/v/xuhaibahmad/flixview.svg)](https://jitpack.io/#xuhaibahmad/flixview)
+
 ![Banner](screenshot.png)
 
 ## Table of Contents
