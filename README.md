@@ -1,4 +1,4 @@
-# Netflix-Grid
+# FlixView
 
 [ ![Download](https://api.bintray.com/packages/xuhaibahmad/maven/FlixView/images/download.svg) ](https://bintray.com/xuhaibahmad/maven/FlixView/_latestVersion)
 
@@ -29,7 +29,7 @@ repositories {
 2. Next, add the FlixView dependency in the `build.gradle` file of your app module:
 
 ```
-implementation 'com.google.android.exoplayer:exoplayer:<current-version>'
+implementation 'com.zuhaibahmad.flixview:flixview:<current-version>'
 ```
 
 3. Add `FlixView` to your layout:
