@@ -14,7 +14,10 @@
 
 ## About
 
-FlixView is a custom Android view to create Netflix-style catalogs for Android TV.
+The Leanback library is quite limited when it comes to building Netflix-style catalog, specially the fixed pointer navigation for Android TV.
+`FlixView` attempts to overcome the complexity by mixing `RecyclerView` with Leanback's `VerticalGridView` to build similar experience.
+
+IMPORTANT: This library is meant for ONLY Android TV with D-pad navigation.
 
 ## Usage
 
@@ -48,6 +51,37 @@ implementation 'com.zuhaibahmad.flixview:flixview:<current-version>'
     app:content_title_text_color="@color/textColorPrimary"
     app:content_title_text_size="@dimen/title_text_size"
     app:category_title_text_color="@color/textColorPrimary" />
+```
+
+4. Add data items to the view:
+
+```
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.main_activity)
+    // Each category has multiple content items
+    val contentItems = ListOf(
+        Content(...),
+        Content(...),
+        Content(...),
+    )
+    val items = 1..5).map {
+        Category(
+            id = it.toString(),
+            name = "Category # $it",
+            items = contentItems.shuffled()
+        )
+    }
+    vFlixView.apply {
+        setItems(items)
+        setOnChildClickedListener { _, thumbnail ->
+            displayMessage("Clicked: ${thumbnail.label}")
+        }
+        setOnChildSelectedListener { _, thumbnail ->
+            displayMessage("Selected: ${thumbnail.label}")
+        }
+    }
+}
 ```
 
 ## Contributing
