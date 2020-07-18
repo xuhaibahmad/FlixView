@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.transition.ViewPropertyTransition
+import com.zuhaibahmad.flixview.FlixView
 import kotlinx.android.synthetic.main.main_activity.*
 
 interface BannerScreen {
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity(), BannerScreen {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        vToolbar.setOnClickListener {
+            FlixView().testIntegration(this);
+        }
     }
 
     override fun updateBanner(url: String?) {

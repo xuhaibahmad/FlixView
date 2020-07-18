@@ -1,2 +1,3 @@
+include ':flixview'
 include ':app'
 rootProject.name = "Netflix Grid Demo"

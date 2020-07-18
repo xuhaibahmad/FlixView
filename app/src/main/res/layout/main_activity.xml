@@ -22,11 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Attributes
-        android:name="com.zuhaibahmad.netflixgriddemo.leanback.LeanbackFragment"
-        android:name="com.zuhaibahmad.netflixgriddemo.recyclerview.RecyclerViewFragment"
-        -->
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/vFragment"
             android:name="com.zuhaibahmad.netflixgriddemo.recyclerview.RecyclerViewFragment"
@@ -43,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/app_name"
+        android:id="@+id/vToolbar"
         app:titleTextColor="@color/colorPrimary" />
 
 </FrameLayout>
