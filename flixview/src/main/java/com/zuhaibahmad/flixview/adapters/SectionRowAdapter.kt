@@ -1,4 +1,4 @@
-package com.zuhaibahmad.flixview.recyclerview
+package com.zuhaibahmad.flixview.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zuhaibahmad.flixview.R
-import com.zuhaibahmad.flixview.leanback.data.BrowseItem
-import com.zuhaibahmad.flixview.leanback.data.Thumbnail
+import com.zuhaibahmad.flixview.data.Category
+import com.zuhaibahmad.flixview.data.Content
 import kotlinx.android.synthetic.main.list_item_content.view.tvTitle
 import kotlinx.android.synthetic.main.list_item_section.view.*
 
-typealias OnChildSelectedListener = (Int, Thumbnail) -> Unit
-typealias OnChildClickedListener = (Int, Thumbnail) -> Unit
+typealias OnChildSelectedListener = (Int, Content) -> Unit
+typealias OnChildClickedListener = (Int, Content) -> Unit
 
 class SectionRowAdapter(
-    private val items: MutableList<BrowseItem.Section> = mutableListOf()
+    private val items: MutableList<Category> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -32,8 +32,15 @@ class SectionRowAdapter(
     private var childClickedListener: OnChildClickedListener? = null
 
     init {
-        items.add(0, BrowseItem.Section(FIRST, EMPTY_STRING, emptyList()))
-        items.add(items.size, BrowseItem.Section(LAST, EMPTY_STRING, emptyList()))
+        items.add(0, Category(FIRST, EMPTY_STRING, emptyList()))
+        items.add(items.size, Category(LAST, EMPTY_STRING, emptyList()))
+    }
+
+    fun setItems(items: List<Category>) = this.items.apply {
+        clear()
+        add(Category(FIRST, EMPTY_STRING, emptyList()))
+        addAll(items)
+        add(Category(LAST, EMPTY_STRING, emptyList()))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -68,7 +75,7 @@ class SectionRowAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    private fun getItem(index: Int): BrowseItem.Section = items[index]
+    private fun getItem(index: Int): Category = items[index]
 
     fun setOnChildSelectedListener(listener: OnChildSelectedListener) {
         this.childSelectedListener = listener
@@ -86,11 +93,8 @@ class SectionRowAdapter(
 
     class SectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(
-            item: BrowseItem.Section,
-            adapter: ContentAdapter
-        ) {
-            itemView.tvTitle.text = item.category
+        fun bind(item: Category, adapter: ContentAdapter) {
+            itemView.tvTitle.text = item.name
             itemView.rvContent.layoutManager = GridLayoutManager(
                 itemView.context,
                 1,

@@ -10,11 +10,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        vFlixView.setOnChildClickedListener{ index, thumbnail ->
-            Snackbar.make(vContainer, "Clicked: ${thumbnail.label}", Snackbar.LENGTH_LONG).show()
+        vFlixView.apply {
+            setItems(FakeDataFactory.getCategorizedContent())
+            setOnChildClickedListener { _, thumbnail ->
+                displayMessage("Clicked: ${thumbnail.label}")
+            }
+            setOnChildSelectedListener { _, thumbnail ->
+                displayMessage("Selected: ${thumbnail.label}")
+            }
         }
-        vFlixView.setOnChildSelectedListener{ index, thumbnail ->
-            Snackbar.make(vContainer, "Selected: ${thumbnail.label}", Snackbar.LENGTH_SHORT).show()
-        }
+    }
+
+    fun displayMessage(message: String) {
+        Snackbar.make(vContainer, message, Snackbar.LENGTH_LONG).show()
     }
 }

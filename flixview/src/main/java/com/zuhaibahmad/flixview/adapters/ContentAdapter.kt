@@ -1,4 +1,4 @@
-package com.zuhaibahmad.flixview.recyclerview
+package com.zuhaibahmad.flixview.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zuhaibahmad.flixview.R
-import com.zuhaibahmad.flixview.leanback.data.Thumbnail
-import com.zuhaibahmad.flixview.recyclerview.ContentAdapter.ContentViewHolder
-import com.zuhaibahmad.flixview.recyclerview.views.CustomHorizontalGridView
+import com.zuhaibahmad.flixview.data.Content
+import com.zuhaibahmad.flixview.adapters.ContentAdapter.ContentViewHolder
+import com.zuhaibahmad.flixview.views.CustomHorizontalGridView
 import kotlinx.android.synthetic.main.list_item_content.view.*
 
 class ContentAdapter(
-    private val items: MutableList<Thumbnail> = mutableListOf()
+    private val items: MutableList<Content> = mutableListOf()
 ) : RecyclerView.Adapter<ContentViewHolder>() {
 
     private var recyclerView: CustomHorizontalGridView? = null
@@ -43,7 +43,7 @@ class ContentAdapter(
 
     inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: Thumbnail) {
+        fun bind(item: Content) {
             itemView.tvTitle.text = item.label
             Glide.with(itemView.context)
                 .asBitmap()

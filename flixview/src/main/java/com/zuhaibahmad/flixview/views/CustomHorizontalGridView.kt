@@ -1,17 +1,14 @@
-package com.zuhaibahmad.flixview.recyclerview.views
+package com.zuhaibahmad.flixview.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.zuhaibahmad.flixview.leanback.data.Thumbnail
-import com.zuhaibahmad.flixview.recyclerview.ContentAdapter
-import com.zuhaibahmad.flixview.recyclerview.utils.StartSnapHelper
-
-typealias OnItemViewSelectedListener = (Int, Thumbnail) -> Unit
-typealias OnItemViewClickedListener = (Int, Thumbnail) -> Unit
+import com.zuhaibahmad.flixview.OnItemViewClickedListener
+import com.zuhaibahmad.flixview.OnItemViewSelectedListener
+import com.zuhaibahmad.flixview.adapters.ContentAdapter
+import com.zuhaibahmad.flixview.utils.StartSnapHelper
 
 class CustomHorizontalGridView @JvmOverloads constructor(
     context: Context,
@@ -43,7 +40,6 @@ class CustomHorizontalGridView @JvmOverloads constructor(
     private fun scrollLeft(): Boolean {
         val linearLayoutManager = layoutManager as LinearLayoutManager
         val pos = linearLayoutManager.findFirstVisibleItemPosition() - 1
-        Log.e("CHGV", "H Scroll Left -> Pos: $pos")
         if (pos >= 0) {
             smoothScrollToPosition(pos)
             updateSelectedPosition()
@@ -54,7 +50,6 @@ class CustomHorizontalGridView @JvmOverloads constructor(
     private fun scrollRight(): Boolean {
         val linearLayoutManager = layoutManager as LinearLayoutManager
         val pos = linearLayoutManager.findLastVisibleItemPosition() + 1
-        Log.e("CHGV", "H Scroll Right -> Pos: $pos")
         if (pos < contentAdapter.itemCount) {
             smoothScrollToPosition(pos)
             updateSelectedPosition()
@@ -65,7 +60,6 @@ class CustomHorizontalGridView @JvmOverloads constructor(
     private fun scrollCenter(): Boolean {
         val pos = getSelectedItemPosition()
         val item = contentAdapter.getItem(pos)
-        Log.e("CVGV", "H Scroll Center: ${item.label}")
         clickedListener?.invoke(pos, item)
         return true
     }
@@ -74,7 +68,6 @@ class CustomHorizontalGridView @JvmOverloads constructor(
         postDelayed({
             val pos = getSelectedItemPosition()
             val item = contentAdapter.getItem(pos)
-            Log.e("CVGV", "H Scroll Selection: ${item.label}")
             selectedListener?.invoke(pos, item)
         }, 500)
     }
